@@ -1,0 +1,11 @@
+.product-all {
+  border-left: 1px solid lightgray;
+  width: 70%;
+  margin-left: 100px;
+  margin-right: 5px;
+  border-right: 1px solid lightgray;
+}
+
+.container {
+  display: flex;
+}

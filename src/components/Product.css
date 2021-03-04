@@ -1,0 +1,24 @@
+.product{
+  display: flex;
+  border-bottom: 1px solid lightgray;
+  margin-bottom: 5px;
+  margin-right: 10px;
+  padding-bottom: 5px;
+}
+
+.product-info {
+  padding: 2%;
+}
+
+.add-to-cart {
+  background-color: orange;
+  width: 150px;
+  height: 40px;
+  border-radius: 5px;
+  font-weight: 700;
+}
+
+.cart-icon {
+  width: 30px;
+  height: 20px;
+}
