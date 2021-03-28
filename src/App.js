@@ -6,8 +6,7 @@ import Manage from './components/Manage.js';
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
 import ProductDetails from './components/ProductDetails';
 import Shipment from './components/Shipment';

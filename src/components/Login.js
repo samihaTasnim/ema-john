@@ -102,6 +102,7 @@ function Login() {
       .catch( error => {
         const newUserInfo = {...user};
         newUserInfo.error = error.message;
+        console.log(error);
         newUserInfo.success = false;
         setUser(newUserInfo);
       });

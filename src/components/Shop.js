@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import './Shop.css';
-import fakeData from '../fakeData';
 import Product from './Product';
 import Cart from './Cart';
 import { addToDatabaseCart, getDatabaseCart } from '../databaseManager';
@@ -8,22 +7,30 @@ import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 const Shop = () => {
-  const data = fakeData.slice(0, 10)
-  const [product, setProduct] = useState(data)
+  const [product, setProduct] = useState([])
+
+  useEffect(() => {
+    fetch('http://localhost:5000/products')
+    .then(res => res.json())
+    .then(data => setProduct(data))
+  }, [])
+
+  
   const [cart, setCart] = useState([])
 
   useEffect(() => {
     const savedCart = getDatabaseCart()
-    console.log(savedCart);
     const productKeys = Object.keys(savedCart)
-    const previousCart = productKeys.map(existingKey => {
-      const product = fakeData.find(x => x.key === existingKey)
-      product.quantity = savedCart[existingKey]
-      return product;
+    fetch('http://localhost:5000/productsByKeys', {
+      method: 'POST',
+      headers: {'Content-Type': "application/json"},
+      body: JSON.stringify(productKeys)
     })
-    setCart(previousCart)
+    .then(res => res.json())
+    .then(data => setCart(data))
   }, [])
-  
+
+
   const handleAddToCart = (product) => {
     const sameProduct = cart.find(x => x.key === product.key)
     let count = 1
