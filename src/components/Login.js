@@ -25,6 +25,15 @@ function Login() {
 
   const googleProvider = new firebase.auth.GoogleAuthProvider();
   const fbProvider = new firebase.auth.FacebookAuthProvider();
+
+  const setIdToken = () => {
+    firebase.auth().currentUser.getIdToken(/* forceRefresh */ true).then(function(idToken) {
+      sessionStorage.setItem('token', idToken)
+    }).catch(function(error) {
+      // Handle error
+    });
+  }
+
   const handleSignIn = () => {
     firebase.auth().signInWithPopup(googleProvider)
     .then(res => {
@@ -36,6 +45,7 @@ function Login() {
         photo: photoURL
       };
       setUser(signedInUser);
+      setIdToken()
     })
     .catch(err => {
       console.log(err);

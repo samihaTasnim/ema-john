@@ -8,20 +8,22 @@ import { Link } from 'react-router-dom';
 
 const Shop = () => {
   const [product, setProduct] = useState([])
+  const [cart, setCart] = useState([])
+  const [search, setSearch] = useState('')
 
   useEffect(() => {
-    fetch('http://localhost:5000/products')
+    fetch('https://mighty-shore-59511.herokuapp.com/products?search='+search)
     .then(res => res.json())
-    .then(data => setProduct(data))
-  }, [])
+    .then(data => {setProduct(data) 
+      console.log(data)})
+  }, [search])
 
   
-  const [cart, setCart] = useState([])
 
   useEffect(() => {
     const savedCart = getDatabaseCart()
     const productKeys = Object.keys(savedCart)
-    fetch('http://localhost:5000/productsByKeys', {
+    fetch('https://mighty-shore-59511.herokuapp.com/productsByKeys', {
       method: 'POST',
       headers: {'Content-Type': "application/json"},
       body: JSON.stringify(productKeys)
@@ -30,6 +32,9 @@ const Shop = () => {
     .then(data => setCart(data))
   }, [])
 
+  const handleSearch = event =>{
+    setSearch(event.target.value);
+  }
 
   const handleAddToCart = (product) => {
     const sameProduct = cart.find(x => x.key === product.key)
@@ -52,6 +57,10 @@ const Shop = () => {
   return (
     <div className="container">
       <div className="product-all">
+      <div class="d-flex w-50 mx-auto m-5">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" onBlur={handleSearch}/>
+        <button class="btn btn-outline-primary">Search</button>
+      </div>
         {product.map(pd => <Product product={pd} key={pd.key} showAddToCart={true}handleAddToCart={handleAddToCart}></Product>)}
       </div>
       <div className="cart">
