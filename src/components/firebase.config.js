@@ -1,4 +1,4 @@
-var firebaseConfig = {
+const firebaseConfig = {
   apiKey: "AIzaSyAFAcV6AIZlb4ie7aR4i8c-wKKPbxCUOFI",
   authDomain: "ema-john--clone-7a3bf.firebaseapp.com",
   projectId: "ema-john--clone-7a3bf",

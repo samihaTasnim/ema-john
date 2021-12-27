@@ -6,7 +6,9 @@ import { UserContext } from '../App';
 import { useContext } from 'react';
 import { useHistory, useLocation } from 'react-router';
 
-firebase.initializeApp(firebaseConfig);
+if (!firebase.apps.length) {
+  firebase.initializeApp(firebaseConfig);
+}
 
 function Login() {
   const [newUser, setNewUser] = useState(false);
@@ -46,6 +48,7 @@ function Login() {
       };
       setUser(signedInUser);
       setIdToken()
+      history.push(from)
     })
     .catch(err => {
       console.log(err);
@@ -169,7 +172,7 @@ function Login() {
         </div>
       }
 
-      <h1>Our own Authentication</h1>
+      <h1>Login</h1>
       <input type="checkbox" onChange={() => setNewUser(!newUser)} name="newUser" id=""/>
       <label htmlFor="newUser">New User Sign up</label>
       <form onSubmit={handleSubmit}>

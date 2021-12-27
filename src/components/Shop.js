@@ -57,9 +57,9 @@ const Shop = () => {
   return (
     <div className="container">
       <div className="product-all">
-      <div class="d-flex w-50 mx-auto m-5">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" onBlur={handleSearch}/>
-        <button class="btn btn-outline-primary">Search</button>
+      <div className="d-flex w-50 mx-auto m-5">
+        <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" onBlur={handleSearch}/>
+        <button className="btn btn-outline-primary">Search</button>
       </div>
         {product.map(pd => <Product product={pd} key={pd.key} showAddToCart={true}handleAddToCart={handleAddToCart}></Product>)}
       </div>
